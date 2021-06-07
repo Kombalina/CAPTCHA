@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Captcha</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link href="css/hexaflip.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+<body>
+
+<script src="js/hexaflip.js">
+ </script>
+ 
+<div>
+    <div class="str"></div>
+<div class="container">
+    <header class="clearfix">
+
+<script>
+let plus = '+';
+let min = '-'
+let umn = '*'
+let res = 0;
+let num1 = 0;
+let num2 = 0;
+let num3 = 0;
+do {
+num1 = Math.ceil(Math.random() * 500) + 0; // Получаем рандомное число один
+num2 = Math.ceil(Math.random() * 500) + 0; // Получаем рандомное число два
+num3 = Math.ceil(Math.random() * 500) + 0; // Получаем рандомное число три
+switch (true) {
+  case (num1 <= 100):
+    res = num1 + num2 + num3;
+	tes = plus;
+	tes2 = plus;
+    break;
+  case (num3 >= 300):
+    res = num1 - num2 + num3;
+	tes = min;
+	tes2 = plus;
+    break;
+	case (num2 > 100):
+    res = num1 + num2 - num3;
+	tes = plus;
+	tes2 = min;
+    break;case (num1 >= 200):
+    res = num1 - num2 - num3;
+	tes = min;
+	tes2 = min;
+    break;case (num1 <= 20):
+    res = num1 * num2 + num3;
+	tes = umn;
+	tes2 = plus;
+    break;case (num3 >= 350):
+    res = num1 * num2 - num3;
+	tes = umn;
+	tes2 = min;
+    break;case (num1 >= 400):
+    res = num1 - (num2 * num3);
+	tes = min;
+	tes2 = umn;
+    break;case (num1 > 100):
+    res = num1 + (num2 * num3);
+	tes = plus;
+	tes2 = umn;
+    break;case (num1 < 10 && num3 <10):
+    res = num1 * num2 * num3;
+	tes = umn;
+	tes2 = umn;
+    break;
+  default:
+    alert( "Произошла ошибка, пожалуйста обновите страницу" );
+};} while (res<0 || res>999);
+console.log(num1);
+console.log(num2);
+console.log(num3);
+console.log(res);
+// document.write("Сумма переменных ", num1, ", ", num2, " и ", num3);
+document.write("<div style='color: black; font:27px Segoe UI Black; position: absolute; top: 20%; left: 10%;'>Если вы не бот, укажите правильный ответ: " ,num1,tes,num2,tes2,num3, "=", "</b></div>");
+</script>
+    </header>
+
+	       <script> 
+    var hexadem,
+            set = [
+                {
+                    value: '0',
+                    style: {
+                        backgroundColor: '#191970' 
+                    }
+                },
+                {
+                    value: '1',
+                    style: {
+                        backgroundColor: '#320b35'
+                    }
+                },
+                {
+                    value: '2',
+                    style: {
+                        backgroundColor: '#240935'
+                    }
+                },
+                {
+                    value: '3',
+                    style: {
+                        backgroundColor: '#1a153f'
+                    }
+                },
+                {
+                    value: '4',
+                    style: {
+                        backgroundColor: '#1e2460'
+                    }
+                },
+                {
+                    value: '5',
+                    style: {
+                        backgroundColor: '#20155e'
+                    }
+                },
+                {
+                    value: '6',
+                    style: {
+                        backgroundColor: '#191970'
+                    }
+                },
+                {
+                    value: '7',
+                    style: {
+                        backgroundColor: '#310062'
+                    }
+                },
+				{
+                    value: '8',
+                    style: {
+                        backgroundColor: '#4b0082'
+                    }
+                },
+				{
+                    value: '9',
+                    style: {
+                        backgroundColor: '#660099'
+                    }
+                },
+				
+				
+            ];
+			
+			 		 
+	
+    document.addEventListener('DOMContentLoaded', function(){
+
+        var submit = document.getElementById('submit'),
+                output = document.getElementById('output');
+
+        hexadem = new HexaFlip(document.getElementById('hexaflip-dem'),
+                {set1: set, set2: set, set3: set,},
+                {size: 200,fontSize: 50, margin: 10, perspective: 1000}
+        );
+
+        submit.addEventListener('click', function(){
+            if(hexadem.getValue().join('') == res ){
+                output.innerHTML = 'Верно!';
+				
+
+                setTimeout(function(){
+                    $(".hexaflip-cube-set1").css('transform','translateZ(2000px)');
+                },100);
+                setTimeout(function(){
+                    $(".hexaflip-cube-set2").css('transform','translateZ(2000px)');
+                },400);
+                setTimeout(function(){
+                    $(".hexaflip-cube-set3").css('transform','translateZ(2000px)');
+                },700);
+				
+            }else{
+				 location.reload();
+				 var message = "Ответ не верен, попробуй снова.";
+				 alert(message);
+            }
+        }, false);
+    }, false);
+
+</script>
+    <div class="main">
+        <div id="hexaflip-dem" class="demo"></div>
+        <div>
+            <span id="submit">Проверить</span>
+            <div id="output"></div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
